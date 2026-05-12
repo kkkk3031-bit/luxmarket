@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المجموعات | لوكس ماركت</title>
+  <meta name="description" content="استكشف مجموعاتنا المختارة من المنتجات الفاخرة">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">الانتقال للمحتوى</a>
+  
+  <div class="announcement-bar">
+    <div class="announcement-content">
+      <span class="badge">جديد</span>
+      <span>شحن مجاني للطلبات فوق 100 د.ك</span>
+    </div>
+    <div class="announcement-actions">
+      <select class="currency-select" aria-label="العملة">
+        <option value="KWD">د.ك</option>
+      </select>
+      <button class="theme-toggle" aria-label="الوضع الداكن">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">لوكس</span>
+        <span class="logo-text">ماركت</span>
+      </a>
+      <nav class="main-nav">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">الرئيسية</a></li>
+          <li><a href="shop.html" class="nav-link">المتجر</a></li>
+          <li><a href="collections.html" class="nav-link active">المجموعات</a></li>
+          <li><a href="about.html" class="nav-link">من نحن</a></li>
+          <li><a href="contact.html" class="nav-link">اتصل بنا</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="auth-links">
+          <a href="login.html" class="auth-link">تسجيل الدخول</a>
+          <a href="register.html" class="auth-link">إنشاء حساب</a>
+        </div>
+        <a href="cart.html" class="cart-button" aria-label="سلة المشتريات">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span class="cart-count">3</span>
+        </a>
+        <button class="menu-toggle" aria-label="القائمة">
+          <span class="menu-line"></span>
+          <span class="menu-line"></span>
+          <span class="menu-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav class="mobile-nav">
+      <ul class="mobile-nav-list">
+        <li><a href="index.html" class="mobile-nav-link">الرئيسية</a></li>
+        <li><a href="shop.html" class="mobile-nav-link">المتجر</a></li>
+        <li><a href="collections.html" class="mobile-nav-link active">المجموعات</a></li>
+        <li><a href="about.html" class="mobile-nav-link">من نحن</a></li>
+        <li><a href="contact.html" class="mobile-nav-link">اتصل بنا</a></li>
+      </ul>
+      <div class="mobile-nav-footer">
+        <a href="login.html" class="mobile-nav-link">تسجيل الدخول</a>
+        <a href="register.html" class="mobile-nav-link">إنشاء حساب</a>
+      </div>
+    </nav>
+  </div>
+
+  <main id="main" class="main">
+    <nav class="breadcrumb">
+      <div class="container">
+        <ol class="breadcrumb-list">
+          <li><a href="index.html">الرئيسية</a></li>
+          <li aria-current="page">المجموعات</li>
+        </ol>
+      </div>
+    </nav>
+
+    <section class="shop-header">
+      <div class="container">
+        <h1 class="shop-title">المجموعات</h1>
+        <p class="shop-description">استكشف مجموعاتنا المختارة</p>
+      </div>
+    </section>
+
+    <section class="categories">
+      <div class="container">
+        <div class="category-grid">
+          <a href="shop.html?collection=new" class="category-card">
+            <div class="category-image">
+              <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=700&fit=crop" alt="الجديد">
+            </div>
+            <div class="category-overlay">
+              <h3 class="category-name">وصل حديثاً</h3>
+              <span class="category-count">اكتشف الجديد</span>
+            </div>
+          </a>
+          
+          <a href="shop.html?collection=bestsellers" class="category-card category-card-large">
+            <div class="category-image">
+              <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&h=700&fit=crop" alt="الأكثر مبيعاً">
+            </div>
+            <div class="category-overlay">
+              <h3 class="category-name">الأكثر مبيعاً</h3>
+              <span class="category-count">الأشهر طلباً</span>
+            </div>
+          </a>
+          
+          <a href="shop.html?collection=sale" class="category-card">
+            <div class="category-image">
+              <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&h=700&fit=crop" alt="العروض">
+            </div>
+            <div class="category-overlay">
+              <h3 class="category-name">العروض</h3>
+              <span class="category-count">خصم حتى 50%</span>
+            </div>
+          </a>
+          
+          <a href="shop.html?collection=watches" class="category-card">
+            <div class="category-image">
+              <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&h=700&fit=crop" alt="الساعات">
+            </div>
+            <div class="category-overlay">
+              <h3 class="category-name">الساعات</h3>
+              <span class="category-count">ساعات فاخرة</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-mark">لوكس</span>
+            <span class="logo-text">ماركت</span>
+          </a>
+        </div>
+        <div class="footer-links">
+          <h3 class="footer-heading">المتجر</h3>
+          <ul class="footer-list">
+            <li><a href="shop.html">المتجر</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3 class="footer-heading">المساعدة</h3>
+          <ul class="footer-list">
+            <li><a href="contact.html">اتصل بنا</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright">© 2025 لوكس ماركت. جميع الحقوق محفوظة.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
