@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الدفع | لوكس ماركت</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .payment-section {
+      padding: var(--space-16) 0;
+    }
+
+    .payment-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: var(--space-8);
+      align-items: start;
+    }
+
+    .payment-card,
+    .payment-summary {
+      background: var(--color-surface-elevated);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-8);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .payment-title {
+      margin-bottom: var(--space-3);
+      font-size: var(--text-3xl);
+    }
+
+    .payment-subtitle {
+      margin-bottom: var(--space-8);
+      color: var(--color-text-secondary);
+    }
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+
+    .method-card {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      background: var(--color-surface);
+      color: var(--color-text);
+      padding: var(--space-5);
+      text-align: right;
+      cursor: pointer;
+      transition: border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .method-card:hover,
+    .method-card.active {
+      border-color: var(--color-accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      background: linear-gradient(135deg, var(--color-accent-light), transparent);
+    }
+
+    .method-card strong {
+      display: block;
+      margin-bottom: var(--space-2);
+      font-size: var(--text-lg);
+    }
+
+    .method-card span {
+      color: var(--color-text-secondary);
+      font-size: var(--text-sm);
+    }
+
+    .payment-panel {
+      display: none;
+    }
+
+    .payment-panel.active {
+      display: block;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: var(--space-2);
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      min-height: 48px;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      background: var(--color-background);
+      color: var(--color-text);
+      font: inherit;
+    }
+
+    .gateway-box {
+      padding: var(--space-6);
+      border: 1px dashed var(--color-border);
+      border-radius: var(--radius-xl);
+      background: var(--color-surface);
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+    }
+
+    .pay-button {
+      width: 100%;
+      margin-top: var(--space-6);
+    }
+
+    .payment-message {
+      min-height: 1.75rem;
+      margin-top: var(--space-4);
+      font-weight: 500;
+    }
+
+    .payment-message.success {
+      color: var(--color-success);
+    }
+
+    .payment-message.error {
+      color: var(--color-error);
+    }
+
+    .summary-list {
+      display: grid;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .summary-item,
+    .summary-total {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+    }
+
+    .summary-item {
+      color: var(--color-text-secondary);
+    }
+
+    .summary-total {
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--color-border);
+      font-size: var(--text-xl);
+      font-weight: 700;
+    }
+
+    .security-note {
+      padding: var(--space-4);
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 900px) {
+      .payment-grid,
+      .form-row,
+      .method-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">الانتقال للمحتوى</a>
+
+  <div class="announcement-bar">
+    <div class="announcement-content">
+      <span class="badge">آمن</span>
+      <span>الدفع مشفر وآمن عبر بوابات الدفع المعتمدة</span>
+    </div>
+  </div>
+
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">لوكس</span>
+        <span class="logo-text">ماركت</span>
+      </a>
+      <nav class="main-nav" aria-label="التنقل">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">الرئيسية</a></li>
+          <li><a href="shop.html" class="nav-link">المتجر</a></li>
+          <li><a href="collections.html" class="nav-link">المجموعات</a></li>
+          <li><a href="about.html" class="nav-link">من نحن</a></li>
+          <li><a href="contact.html" class="nav-link">اتصل بنا</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="auth-links">
+          <a href="login.html?returnTo=payment.html" class="auth-link">تسجيل الدخول</a>
+          <a href="register.html?returnTo=payment.html" class="auth-link">إنشاء حساب</a>
+        </div>
+        <a href="cart.html" class="cart-button" aria-label="سلة المشتريات">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span class="cart-count">3</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="main">
+    <nav class="breadcrumb" aria-label="مسار">
+      <div class="container">
+        <ol class="breadcrumb-list">
+          <li><a href="index.html">الرئيسية</a></li>
+          <li><a href="cart.html">سلة المشتريات</a></li>
+          <li><a href="checkout.html">إتمام الشراء</a></li>
+          <li aria-current="page">الدفع</li>
+        </ol>
+      </div>
+    </nav>
+
+    <section class="payment-section">
+      <div class="container">
+        <div class="payment-grid">
+          <section class="payment-card">
+            <h1 class="payment-title">اختر طريقة الدفع</h1>
+            <p class="payment-subtitle">يمكنك الدفع الآن عبر PayPal أو Stripe أو Visa أو بطاقة ائتمان مباشرة.</p>
+
+            <div class="method-grid">
+              <button class="method-card active" type="button" data-method="paypal">
+                <strong>PayPal</strong>
+                <span>الدفع السريع عبر حساب PayPal</span>
+              </button>
+              <button class="method-card" type="button" data-method="stripe">
+                <strong>Stripe</strong>
+                <span>الدفع عبر Stripe Checkout</span>
+              </button>
+              <button class="method-card" type="button" data-method="visa">
+                <strong>Visa</strong>
+                <span>بطاقات Visa المباشرة</span>
+              </button>
+              <button class="method-card" type="button" data-method="card">
+                <strong>بطاقة ائتمان</strong>
+                <span>ماستركارد أو أي بطاقة بنكية</span>
+              </button>
+            </div>
+
+            <div class="payment-panel active" data-panel="paypal">
+              <div class="gateway-box">
+                سيتم تحويل العميل إلى بوابة PayPal لإتمام الدفع بأمان ثم العودة إلى صفحة تأكيد الطلب.
+              </div>
+            </div>
+
+            <div class="payment-panel" data-panel="stripe">
+              <div class="gateway-box">
+                سيتم فتح Stripe Checkout لإكمال الدفع باستخدام البطاقة أو Apple Pay أو Google Pay حسب الجهاز.
+              </div>
+            </div>
+
+            <div class="payment-panel" data-panel="visa">
+              <form class="form-grid" id="visaForm">
+                <div class="form-group">
+                  <label>اسم حامل البطاقة</label>
+                  <input type="text" placeholder="الاسم كما يظهر على البطاقة" required>
+                </div>
+                <div class="form-group">
+                  <label>رقم بطاقة Visa</label>
+                  <input type="text" inputmode="numeric" placeholder="4111 1111 1111 1111" required>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>تاريخ الانتهاء</label>
+                    <input type="text" placeholder="MM/YY" required>
+                  </div>
+                  <div class="form-group">
+                    <label>CVV</label>
+                    <input type="text" inputmode="numeric" placeholder="123" required>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div class="payment-panel" data-panel="card">
+              <form class="form-grid" id="cardForm">
+                <div class="form-group">
+                  <label>اسم حامل البطاقة</label>
+                  <input type="text" placeholder="الاسم الكامل" required>
+                </div>
+                <div class="form-group">
+                  <label>رقم البطاقة</label>
+                  <input type="text" inputmode="numeric" placeholder="0000 0000 0000 0000" required>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>تاريخ الانتهاء</label>
+                    <input type="text" placeholder="MM/YY" required>
+                  </div>
+                  <div class="form-group">
+                    <label>رمز الأمان</label>
+                    <input type="text" inputmode="numeric" placeholder="123" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>نوع البطاقة</label>
+                  <select required>
+                    <option value="mastercard">ماستركارد</option>
+                    <option value="amex">أمريكان إكسبريس</option>
+                    <option value="mada">بطاقة بنكية</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+
+            <button class="btn btn-primary pay-button" id="payButton" type="button">تأكيد الدفع الآن</button>
+            <div class="payment-message" id="paymentMessage" aria-live="polite"></div>
+          </section>
+
+          <aside class="payment-summary">
+            <h2>ملخص الطلب</h2>
+            <div class="summary-list">
+              <div class="summary-item">
+                <span>المجموع</span>
+                <span data-payment-subtotal>0 د.ك</span>
+              </div>
+              <div class="summary-item">
+                <span>الشحن</span>
+                <span data-payment-shipping>0 د.ك</span>
+              </div>
+              <div class="summary-item">
+                <span>الضريبة</span>
+                <span data-payment-tax>0 د.ك</span>
+              </div>
+              <div class="summary-total">
+                <span>الإجمالي</span>
+                <span data-payment-total>0 د.ك</span>
+              </div>
+            </div>
+            <p class="security-note">
+              هذه الصفحة جاهزة لتدفق الدفع. عند ربط PayPal أو Stripe فعلياً، يمكن توجيه زر الدفع إلى الجلسة الحقيقية لكل مزود.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
