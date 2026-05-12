@@ -55,21 +55,39 @@
     }
   }
 
-  async function submitJson(url, payload) {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    });
+  const USERS_KEY = 'luxmarket-users';
 
-    const data = await response.json();
-    if (!response.ok) {
-      throw new Error(data.error || 'حدث خطأ غير متوقع.');
+  function loadUsers() {
+    try { return JSON.parse(localStorage.getItem(USERS_KEY) || '[]'); } catch { return []; }
+  }
+
+  function saveUsers(users) {
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+  }
+
+  function registerUser(payload) {
+    const users = loadUsers();
+    if (users.find(u => u.email === payload.email)) {
+      throw new Error('هذا البريد الإلكتروني مسجّل مسبقاً.');
     }
+    const user = {
+      id: Date.now().toString(),
+      full_name: payload.fullName,
+      email: payload.email,
+      phone: payload.phone,
+      created: new Date().toISOString()
+    };
+    users.push({ ...user, password: payload.password });
+    saveUsers(users);
+    return { user };
+  }
 
-    return data;
+  function loginUser(email, password) {
+    const users = loadUsers();
+    const match = users.find(u => u.email === email && u.password === password);
+    if (!match) throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة.');
+    const { password: _pw, ...user } = match;
+    return { user };
   }
 
   function bindTabs() {
@@ -101,11 +119,11 @@
       const password = String(formData.get('password') || '');
 
       try {
-        const data = await submitJson('/api/login', { email, password });
+        const data = loginUser(email, password);
         localStorage.setItem('luxmarket-last-email', email);
         saveUser(data.user);
         setMessage('تم تسجيل الدخول. جارٍ التحويل...', 'success');
-        window.location.href = getReturnUrl();
+        setTimeout(() => { window.location.href = getReturnUrl(); }, 800);
       } catch (error) {
         setMessage(error.message, 'error');
       }
@@ -129,11 +147,11 @@
       };
 
       try {
-        const data = await submitJson('/api/register', payload);
+        const data = registerUser(payload);
         localStorage.setItem('luxmarket-last-email', payload.email);
         saveUser(data.user);
-        setMessage('تم إنشاء الحساب وحفظه في قاعدة البيانات. جارٍ التحويل...', 'success');
-        window.location.href = getReturnUrl();
+        setMessage('تم إنشاء الحساب بنجاح. جارٍ التحويل...', 'success');
+        setTimeout(() => { window.location.href = getReturnUrl(); }, 800);
       } catch (error) {
         setMessage(error.message, 'error');
       }
